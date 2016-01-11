@@ -34,7 +34,9 @@ int main()
     for(i=0;i<n;i++)
     {
         for(j=0;j<i;j++)
+        {
             swap(&a[i][j],&a[j][i]);
+        }
 
     }
 
@@ -49,7 +51,9 @@ void printArray(int** arr, int n)
      for(i=0;i<n;i++)
     {
         for(j=0;j<n;j++)
+        {
             printf(" %d ",arr[i][j]);
+        }
 
         printf("\n");
     }
