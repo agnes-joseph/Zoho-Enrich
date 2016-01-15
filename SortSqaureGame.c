@@ -41,7 +41,7 @@ void move(char key)
         default: return;
     }
 
-    if( i<0 || i==3 || j<0 || i==3)
+    if( i<0 || i==3 || j<0 || j==3)
         return;
 
     char temp = a[blank_i][blank_j];
