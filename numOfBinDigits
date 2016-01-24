@@ -6,19 +6,12 @@ int main()
     printf("Enter a number: ");
     scanf("%d",&n);
 
-    if(n>1)
+    do
     {
-        while(n>0)
-        {
-            n=n/2;
-            count++;
-        }
+        n=n>>1;
+        count++;
     }
-    else
-    {
-        count = 1;
-    }
-
+    while(n>0);
 
     printf("The number of bits required is: %d",count);
 }
