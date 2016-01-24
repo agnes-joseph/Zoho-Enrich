@@ -1,10 +1,8 @@
 #include<stdio.h>
 
-int main()
+int numOfBinDigits(int n)
 {
-    int n,count=0;
-    printf("Enter a number: ");
-    scanf("%d",&n);
+    int count =0;
 
     do
     {
@@ -13,5 +11,16 @@ int main()
     }
     while(n>0);
 
-    printf("The number of bits required is: %d",count);
+    return count;
+}
+
+int main()
+{
+    int n,count;
+    printf("Enter a number: ");
+    scanf("%d",&n);
+
+    count = numOfBinDigits(n);
+
+    printf("The number of bits required for %d is: %d",n,count);
 }
