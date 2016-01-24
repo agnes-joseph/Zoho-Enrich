@@ -1,0 +1,24 @@
+#include<stdio.h>
+
+int main()
+{
+    int n,count=0;
+    printf("Enter a number: ");
+    scanf("%d",&n);
+
+    if(n>1)
+    {
+        while(n>0)
+        {
+            n=n/2;
+            count++;
+        }
+    }
+    else
+    {
+        count = 1;
+    }
+
+
+    printf("The number of bits required is: %d",count);
+}
