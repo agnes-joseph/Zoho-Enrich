@@ -3,7 +3,7 @@
 struct Node
 {
     int x;
-    struct Node *next,*prev;
+    struct Node *next;
 };
 
 
@@ -11,20 +11,20 @@ struct Node* insert(int x,struct Node *head)
 {
     struct Node *p = (struct Node*)malloc(sizeof(struct Node));
     p->x=x;
-    p->prev=NULL;
-    if(head!=NULL)
-    {
-        head->prev=p;
-    }
     p->next=head;
     return p;
 }
 
-struct Node* lastNode(struct Node *p)
+struct Node* reverse(struct Node *q)
 {
-    while(p->next!=NULL )
+    struct Node *p,*temp;
+    p=NULL;
+    while(q!=NULL)
     {
-        p=p->next;
+        temp = q->next;
+        q->next = p;
+        p=q;
+        q=temp;
     }
     return p;
 }
@@ -34,9 +34,6 @@ struct Node* add(struct Node* p,struct Node* q)
     int carry=0,sum;
     struct Node* h3=NULL;
 
-    p=lastNode(p);
-    q=lastNode(q);
-
     while(p!=NULL && q!=NULL)
     {
         sum = p->x + q->x + carry;
@@ -44,8 +41,8 @@ struct Node* add(struct Node* p,struct Node* q)
         sum = sum%10;
 
         h3 = insert(sum,h3);
-        p=p->prev;
-        q=q->prev;
+        p=p->next;
+        q=q->next;
     }
 
     while(p!=NULL )
@@ -55,7 +52,7 @@ struct Node* add(struct Node* p,struct Node* q)
         sum = sum%10;
 
         h3 = insert(sum,h3);
-        p=p->prev;
+        p=p->next;
     }
     while(q!=NULL)
     {
@@ -64,7 +61,7 @@ struct Node* add(struct Node* p,struct Node* q)
         sum = sum%10;
 
         h3 = insert(sum,h3);
-        q=q->prev;
+        q=q->next;
     }
     if(carry)
     {
@@ -98,16 +95,20 @@ int main()
 {
     struct Node *h1=NULL,*h2=NULL,*h3=NULL;
     int a,b;
-    printf("Enter two number");
+    printf("Enter two numbers: ");
     scanf("%d%d",&a,&b);
     h1=toLinklist(a,h1);
     h2=toLinklist(b,h2);
-    h3=add(h1,h2);
 
     printf("First num:\n");
     display(h1);
     printf("Second num:\n");
     display(h2);
+
+    h1 = reverse(h1);
+    h2 = reverse(h2);
+    h3=add(h1,h2);
+
     printf("Sum:\n");
     display(h3);
 
