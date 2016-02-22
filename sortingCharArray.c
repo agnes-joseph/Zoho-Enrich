@@ -4,7 +4,7 @@ struct Node
 {
     char a[10];
     struct node *next;
-}*buckets[11];
+}*buckets[11]; //buckets for empty space and digits 0-9
 
 void display(struct Node* p)
 {
@@ -16,7 +16,7 @@ void display(struct Node* p)
     printf("NULL\n\n");
 }
 
-void displayBuckets()
+void displayBuckets() 
 {
     int i;
     for(i=0;i<11;i++)
@@ -25,7 +25,7 @@ void displayBuckets()
     }
 }
 
-struct Node* insert(char *a,struct Node *head)
+struct Node* insert(char *a,struct Node *head) //insert at the back of the linklist
 {
     struct Node *p = (struct Node*)malloc(sizeof(struct Node));
     strcpy(p->a,a);
@@ -47,7 +47,7 @@ struct Node* insert(char *a,struct Node *head)
     }
 }
 
-void copyBuckets(char a[10][10])
+void copyBuckets(char a[10][10]) //empty the buckets into array 
 {
     int i,j=0;
     for(i=0;i<11;i++)
@@ -84,7 +84,7 @@ int main()
         for(i=0;i<n;i++)
         {
             len = strlen(a[i]);
-            t1=(len-j>=0)?a[i][len-j]-'0'+1:0;
+            t1=(len-j>=0)? (a[i][len-j]-'0'+1) : 0; //choosing which bucket to insert into. 0 if empty space
             buckets[t1]=insert(a[i],buckets[t1]);
         }
         //displayBuckets();
