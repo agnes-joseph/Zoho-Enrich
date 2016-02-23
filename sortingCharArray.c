@@ -12,7 +12,7 @@ int compare(char a[],char b[])
 }
 int main()
 {
-    char a[10][10]={"1","10","99","910","11"};
+    char a[10][10];
     int i=0,j,n;
 
     scanf("%d",&n);
