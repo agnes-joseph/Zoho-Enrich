@@ -1,101 +1,52 @@
 #include<stdio.h>
+#include<string.h>
 
-struct Node
-{
-    char a[10];
-    struct node *next;
-}*buckets[11]; //buckets for empty space and digits 0-9
-
-void display(struct Node* p)
-{
-    while(p!=NULL)
-    {
-        printf("%s->",p->a);
-        p=p->next;
-    }
-    printf("NULL\n\n");
-}
-
-void displayBuckets() 
+int compare(char a[],char b[])
 {
     int i;
-    for(i=0;i<11;i++)
-    {
-        display(buckets[i]);
-    }
-}
-
-struct Node* insert(char *a,struct Node *head) //insert at the back of the linklist
-{
-    struct Node *p = (struct Node*)malloc(sizeof(struct Node));
-    strcpy(p->a,a);
-    if(head==NULL){
-    p->next=NULL;
-    return p;
-    }
+    for(i=0;a[i]!='\0'&&a[i]==b[i];i++);
+    if(a[i]>b[i])
+        return 1;
     else
-    {
-        struct Node *q=head;
-        while(q->next!=NULL)
-        {
-            q=q->next;
-
-        }
-        q->next=p;
-        p->next=NULL;
-        return head;
-    }
+        return 0;
 }
-
-void copyBuckets(char a[10][10]) //empty the buckets into array 
-{
-    int i,j=0;
-    for(i=0;i<11;i++)
-    {
-        struct Node *p=buckets[i];
-        while(p!=NULL)
-        {
-            strcpy(a[j],p->a);
-            j++;
-            p=p->next;
-        }
-        buckets[i]=NULL;
-    }
-}
-
 int main()
 {
-    int i,j,t1,n,max_digits=0,len;
-    char a[10][10];
-    printf("Enter number of elements: ");
+    char a[10][10]={"1","10","99","910","11"};
+    int i=0,j,n;
+
     scanf("%d",&n);
     for(i=0;i<n;i++)
     {
         scanf("%s",a[i]);
-        len=strlen(a[i]);
-        if(len>max_digits)
-        {
-            max_digits=len;
-        }
     }
 
-    for(j=1;j<=max_digits;j++)
+    for(i=0;i<n;i++)
     {
-        for(i=0;i<n;i++)
+        for(j=i+1;j<n;j++)
         {
-            len = strlen(a[i]);
-            t1=(len-j>=0)? (a[i][len-j]-'0'+1) : 0; //choosing which bucket to insert into. 0 if empty space
-            buckets[t1]=insert(a[i],buckets[t1]);
+            if(strlen(a[i])>=strlen(a[j]))
+            {
+                if(strlen(a[i]) == strlen(a[j]))
+                {
+                    int flag = compare(a[i],a[j]);
+                    if(flag == 0)
+                    {
+                        continue;
+                    }
+                }
+                char temp[10];
+                strcpy(temp,a[i]);
+                strcpy(a[i],a[j]);
+                strcpy(a[j],temp);
+
+            }
         }
-        //displayBuckets();
-        copyBuckets(a);
     }
 
-    //displayBuckets();
-    copyBuckets(a);
+    printf("Sorted array: \n");
     for(i=0;i<n;i++)
     {
         printf("%s\t",a[i]);
     }
-
 }
