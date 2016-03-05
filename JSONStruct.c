@@ -1,4 +1,4 @@
-struct Student
+struct Person
 {
   int contact_id;
   char contact_name[10];
