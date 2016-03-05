@@ -1,3 +1,10 @@
+struct Person 
+{
+  int contact_person_id;
+  char first_name[10],last_name[10];
+  char email[20];
+};
+
 struct Contact
 {
   int contact_id;
@@ -6,10 +13,5 @@ struct Contact
   struct Person *contact_persons[10];
 };
 
-struct Person 
-{
-  int contact_person_id;
-  char first_name[10],last_name[10];
-  char email[20];
-};
+
   
