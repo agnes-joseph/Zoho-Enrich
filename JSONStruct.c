@@ -11,5 +11,5 @@ struct Contact
   int contact_person_id;
   char first_name[10],last_name[10];
   char email[20];
-}
+};
   
