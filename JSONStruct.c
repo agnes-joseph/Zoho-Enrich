@@ -10,7 +10,7 @@ struct Contact
   int contact_id;
   char *contact_name;
   char *street,*area,*city;
-  struct Person *contact_persons[10];
+  struct Person *contact_persons;
 }*contactlist;
 
 
