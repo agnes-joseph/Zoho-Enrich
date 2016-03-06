@@ -1,17 +1,17 @@
 struct Person 
 {
   int contact_person_id;
-  char first_name[10],last_name[10];
-  char email[20];
+  char *first_name,*last_name;
+  char *email;
 };
 
 struct Contact
 {
   int contact_id;
-  char contact_name[10];
-  char street[25],area[10],city[10];
+  char *contact_name;
+  char *street,*area,*city;
   struct Person *contact_persons[10];
-};
+}*contactlist;
 
 
   
