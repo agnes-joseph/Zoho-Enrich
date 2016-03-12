@@ -1,3 +1,14 @@
+//
+//  hex.c
+//  
+//
+//  Created by R.M.D. Engineering College  on 12/03/16.
+//
+//
+
+#include <stdio.h>
+
+
 #include<stdio.h>
 
 struct Node
@@ -6,66 +17,52 @@ struct Node
     struct Node* left,*right;
 };
 
-struct Node * insert(int x,struct Node* head)
+struct Node* newNode(int x)
 {
-    if(head == NULL)
+    struct Node* node = (struct Node *)malloc(sizeof(struct Node));
+    node->value = x;
+    node->left = NULL;
+    node->right=NULL;
+    return node;
+}
+
+int isLeaf(struct Node* head)
+{
+    if(head!=NULL && head->left == NULL && head->right == NULL)
     {
-        struct Node* temp = (struct Node*) malloc(sizeof(struct Node));
-        temp->value = x;
-        temp->left = NULL;
-        temp->right = NULL;
-        return temp;
-    }
-    else if(head->value > x)
-    {
-        head->left = insert(x,head->left);
+        return 1;
     }
     else
     {
-        head->right = insert(x,head->right);
+        return 0;
     }
-    return head;
-
-}
-
-void postorder(struct Node* head)
-{
-    if (head == NULL)
-    {
-        return;
-    }
-
-    postorder(head->left);
-    postorder(head->right);
-    printf("%d  ",head->value);
 }
 
 int leftSum(struct Node* head)
 {
+    int sum=0;
     if(head == NULL)
     {
         return 0;
     }
-    else
+    if(isLeaf(head->left))
     {
-        return head->value + leftSum(head->left);
+        sum = head->left->value;
     }
+    return sum + leftSum(head->left)+ leftSum(head->right);
 }
 
 int main()
 {
-    int x,n;
-    struct Node *head=NULL;
-    printf("Enter number of nodes: ");
-    scanf("%d",&n);
-    printf("Enter the nodes: ");
-    while(n--)
-    {
-        scanf("%d",&x);
-        head = insert(x,head);
-    }
-    //postorder(head);
-    int sum = leftSum(head);
-    printf("The sum is %d",sum);
-
+    struct Node *root=NULL;
+    root = newNode(10);
+    root->left = newNode(1);
+    root->right = newNode(10);
+    
+    root->left->right = newNode(4);
+    root->left->left = newNode(3);
+    
+    root->right->left = newNode(15);
+    printf("The sum is %d",leftSum(root));
+    
 }
